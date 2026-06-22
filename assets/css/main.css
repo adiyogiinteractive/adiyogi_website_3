@@ -1687,7 +1687,8 @@ p {
 @media (max-width: 767px) {
   .footer {
     padding-top: 120px;
-    background: #5864FF;
+    /* background: #5864FF; */
+    background: rgba(88, 100, 255, 0.1);
   }
 }
 
