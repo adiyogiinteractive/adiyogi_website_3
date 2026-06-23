@@ -96,7 +96,47 @@
   new WOW().init();
 })();
 
-document.getElementById('submit').addEventListener('click', function(event) {
+
+function sendWhatsApp() {
+    var phoneNumber = "919427254481"; // Replace with the recipient's number
+    var message = "Hello, I visited your website, and I want to know more about your services.";
+    // Encode the message
+    var encodedMessage = encodeURIComponent(message);
+    console.log(encodedMessage);
+    
+    var url = "https://wa.me/" + phoneNumber + "?text=" + encodedMessage;
+
+    // Open the link in a new window/tab
+    window.open(url, '_blank').focus();
+}
+
+
+document.getElementById('contactForm').addEventListener('submit', function(event) {
+    //event.preventDefault(); // required and important
+    fetch(event.action, {
+        method: 'POST',
+        body: new FormData(document.getElementById('contactForm')),
+        mode: 'no-cors' // required and important
+    }).then(() => {
+        alert("Form submission is confirmed.");
+        clearFormFields();
+    }).catch((error) => {
+        alert("There was an error submitting form.");
+    });
+});
+
+function clearFormFields(){
+  document.getElementById("contactForm").reset();
+}
+
+document.getElementById('sendWhatsapp').addEventListener('click', function(event) {
+    event.preventDefault(); // required and important
+    sendWhatsApp();
+    //getLinkWhastapp("919427254481", "Hello, This is just a testing whatsapp.");
+});
+
+/* Testing Code
+  document.getElementById('submit').addEventListener('click', function(event) {
     const isMobile = navigator.userAgentData.mobile;
     const platform = navigator.userAgent;
     console.log(isMobile);
@@ -139,3 +179,4 @@ function getLinkWhastapp(number, message) {
 
   return url
 }
+*/
